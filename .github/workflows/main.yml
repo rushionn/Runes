@@ -7,13 +7,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # 明确指定Ubuntu版本
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v3  # 更新到v3版本
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v4  # 更新到v4版本
       with:
         python-version: '3.8'  # 替换成你需要的Python版本
 
