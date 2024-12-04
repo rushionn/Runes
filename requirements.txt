@@ -1,0 +1,2 @@
+pynput
+tkinter  # tkinter是Python的内置库，无需安装但可以作为信息
