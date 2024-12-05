@@ -10,15 +10,17 @@
             width: 128px; /* 圖片寬度 */
             height: 256px; /* 圖片高度 */
             display: flex; /* 使其為彈性容器 */
-            justify-content: center; /* 垂直置中 */
-            align-items: center; /* 水平置中 */
+            justify-content: center; /* 水平置中 */
+            align-items: center; /* 垂直置中 */
+            margin: 0 auto; /* 左右自動間距以置中 */
+            margin-bottom: 20px; /* 圖片和標題之間的間距 */
         }
     </style>
 </head>
 <body>
     <article>
         <div class="article-image">
-            <img src="your-image-url.gif" alt="HTML 基礎教學圖片" width="256" height="128">
+            <img src="your-image-url.gif" alt="HTML 基礎教學圖片" width="128" height="256"> <!-- 調整為適當的寬高 -->
         </div>
         <h1>HTML 基礎教學</h1>
         <p>HTML（超文本標記語言）是構建網站的基礎。它用來描述網頁的結構。</p>
