@@ -105,22 +105,64 @@
         }
 
         function loadArticle(event, url) {
-            event.preventDefault();
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    document.querySelector('main').innerHTML = data;
+    event.preventDefault();
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            // 提取標題
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = data;
+            const title = tempDiv.querySelector('h1').textContent;  // 假設有<h1>標題
 
-                    // 加入返回按鈕
-                    const backButton = document.createElement('button');
-                    backButton.textContent = "返回上一頁";
-                    backButton.onclick = () => {
-                        loadArticles(currentPage); // 確保返回的頁碼正確
-                    };
-                    document.querySelector('main').appendChild(backButton);
-                })
-                .catch(error => console.error('Error loading article:', error));
-        }
+            // 更新主內容
+            document.querySelector('main').innerHTML = data;
+
+            // 加入返回按鈕
+            const backButton = document.createElement('button');
+            backButton.textContent = "返回上一頁";
+            backButton.onclick = () => {
+                loadArticles(currentPage); // 確保返回的頁碼正確
+            };
+            document.querySelector('main').appendChild(backButton);
+        })
+        .catch(error => console.error('Error loading article:', error));
+}
+function loadArticles(page) {
+    // 模擬AJAX呼叫來獲取文章列表
+    const articles = [
+        { title: "HTML 基礎教學", url: "articles/article1.html" },
+        { title: "CSS 基礎教學", url: "articles/article2.html" },
+        { title: "JavaScript 基礎教學", url: "articles/article3.html" },
+        // 可以替換成從Backend獲取的數據
+    ];
+    
+    const start = (page - 1) * articlesPerPage;
+    const end = start + articlesPerPage;
+    const paginatedArticles = articles.slice(start, end);
+
+    const container = document.getElementById('article-container');
+    container.innerHTML = ""; // 清空容器
+    
+    paginatedArticles.forEach(article => {
+        const div = document.createElement('div');
+        div.className = 'article-pane';
+        div.innerHTML = `
+            <h3>
+                <a href="${article.url}" class="article-link" onclick="loadArticle(event, '${article.url}')">
+                    ${article.title}
+                </a>
+            </h3>
+            <p>這是一段關於 ${article.title} 的簡短描述。</p>
+        `;
+        container.appendChild(div);
+    });
+    generatePagination();
+}
 
         // 初始載入
         loadArticles(currentPage);
