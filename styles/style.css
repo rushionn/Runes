@@ -1,0 +1,116 @@
+body {
+    font-family: "微軟正黑體", Arial, sans-serif; /* 設定字體為微軟正黑體 */
+    margin: 0;
+    padding: 0;
+    background-color: #172B4B;
+    color: #F5D07D;
+    font-size: 20px; /* Main的所有字體大小調整 */
+}
+
+header {
+    background-color: #2C3E50;
+    color: #F5D07D;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 220px; /* 側邊欄固定寬度 - 可調整 */
+    background-color: #2C3E50;
+    padding: 15px;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    font-size: 18px; /* 旁邊菜單字體大小調整為稍大 */
+}
+
+/* 大頭貼的樣式 */
+.avatar {
+    width: 128px; 
+    height: 128px;
+    border-radius: 50%;
+    background-color: #bbb;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; /* 使大頭貼置中 */
+}
+
+/* 預留的文字空間樣式 */
+.avatar-text {
+    text-align: center; /* 文字置中對齊 */
+    font-size: 14px; /* 文字大小 - 可調整 */
+    margin-bottom: 20px; /* 與下方元素的間距 */
+}
+
+/* 按鈕樣式 */
+.sidebar button {
+    background-color: #2C3E50;
+    color: #F5D07D;
+    border: none;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    cursor: pointer;
+    font-size: 28px; /* 按鈕文字大小調整，與主內容一致 */
+}
+
+/* 鼠標懸停效果 */
+.sidebar button:hover {
+    background-color: #668B9B; 
+}
+
+/* 社交圖標的樣式 */
+.social-icons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+}
+
+/* 主內容區域樣式 */
+main {
+    margin-left: 240px; /* 留出側邊欄位置 */
+    padding: 20px;
+    text-align: center; /* 預設將主內容置中 */
+}
+
+/* 搜索框及標籤 */
+.search-container {
+    margin-top: 20px;
+}
+
+#search {
+    padding: 5px;
+    width: 100%;
+}
+
+/* 超連結的樣式 */
+a {
+    color: #F5D07D;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #FF95CA;
+}
+
+/* 頁腳樣式 */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #2C3E50;
+    color: #F5D07D;
+}
