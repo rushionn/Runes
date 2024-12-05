@@ -6,11 +6,15 @@
     <link rel="stylesheet" href="styles/style.css">
     <title>Layman Test</title>
     <style>
+        header {
+            height: 50px; /* 縮小 header 高度 */
+        }
+
         .dropdown-list {
             background-color: #2C3E50; /* 與按鈕相同背景顏色 */
             color: #F5D07D; /* 與文字顏色相同 */
             padding: 10px;
-            display: none; /* 預設隱藏 */
+            display: none; /* 預設隱藏 */ /* 開啟:on */
         }
 
         .dropdown-list a {
@@ -23,11 +27,15 @@
         .dropdown-list a:hover {
             text-decoration: underline; /* 懸停時添加底線效果 */
         }
+
+        .article-pane {
+            margin: 20px 0; /* 文章面板上下外邊距 */
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>   </h1>
+        <h1></h1>
     </header>
     <div class="container">
         <nav class="sidebar">
@@ -48,10 +56,10 @@
             </div>
             <button onclick="location.href='index.html'">Home</button>
             <button id="runesToolButton">RunesTool</button>
-            <div id="runesToolList" class="dropdown-list" style="display: none;">
-                <a href="RunesTool/BatTransform/index.html">BatTransform</a>
-                <a href="RunesTool/BytesIOTransform/index.html">BytesIOTransform</a>
-                <a href="#tool3">尚未新增</a>
+            <div id="runesToolList" class="dropdown-list">
+                <a href="#" onclick="loadRunesTool('RunesTool/BatTransform/index.html')">BatTransform</a>
+                <a href="#" onclick="loadRunesTool('RunesTool/BytesIOTransform/index.html')">BytesIOTransform</a>
+                <a href="#">尚未新增</a>
             </div>
             <button onclick="location.href='about.html'">About</button>
             <div class="search-container">
@@ -60,7 +68,7 @@
             </div>
             <br><br><br><br><br><br>
             <div class="avatar-text">
-                <span>        <p class="footer-text">&copy; Rushionn's Ai Theme</p></span>
+                <span><p class="footer-text">&copy; Rushionn's Ai Theme</p></span>
             </div>
         </nav>
         <main>
@@ -77,8 +85,10 @@
     <script>
         // 省略的 JavaScript 部分
         const articles = [
-            // 模擬從資料夾讀取的文章，實際用時應使用 AJAX 認識文件讀取
-            // 這裡可以添加更多文章...
+            { title: "文章 1", url: "article1.html" },
+            { title: "文章 2", url: "article2.html" },
+            { title: "文章 3", url: "article3.html" }
+            // 加入更多模擬文章
         ];
         
         const articlesPerPage = 10;
@@ -96,7 +106,7 @@
                 const div = document.createElement('div');
                 div.className = 'article-pane';
                 div.innerHTML = `
-                    <h3><a href="${article.url}" class="article-link" onclick="loadArticle(event, '${article.url}')">${article.title}</a></h3>
+                    <h3><a href="#" class="article-link" onclick="loadArticle(event, '${article.url}')">${article.title}</a></h3>
                     <p>這是一段關於 ${article.title} 的簡短描述。</p>
                 `;
                 container.appendChild(div);
@@ -136,11 +146,6 @@
                     return response.text();
                 })
                 .then(data => {
-                    // 提取標題
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = data;
-                    const title = tempDiv.querySelector('h1').textContent;  // 假設有<h1>標題
-
                     // 更新主內容
                     document.querySelector('main').innerHTML = data;
 
@@ -155,13 +160,37 @@
                 .catch(error => console.error('Error loading article:', error));
         }
 
+        // 新增 RunesTool 加載功能
+        function loadRunesTool(url) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // 更新主內容
+                    document.querySelector('main').innerHTML = data;
+
+                    // 加入返回按鈕
+                    const backButton = document.createElement('button');
+                    backButton.textContent = "返回上一頁";
+                    backButton.onclick = () => {
+                        loadArticles(currentPage); // 確保返回的頁碼正確
+                    };
+                    document.querySelector('main').appendChild(backButton);
+                })
+                .catch(error => console.error('Error loading RunesTool:', error));
+        }
+
         // 初始載入
         loadArticles(currentPage);
         
-        // 為 Runestool 按鈕添加事件處理
+        // 為 RunesTool 按鈕添加事件處理
         document.getElementById("runesToolButton").addEventListener("click", function() {
             const dropdown = document.getElementById("runesToolList");
-            if (dropdown.style.display === "none") {
+            if (dropdown.style.display === "none" || dropdown.style.display === "") {
                 dropdown.style.display = "block"; // 顯示下拉列表
             } else {
                 dropdown.style.display = "none"; // 隱藏下拉列表
