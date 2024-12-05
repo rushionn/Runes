@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片代碼轉換</title>
+    
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', sans-serif;
+            background-color: #172B4B;
+            color: #F5D07D;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        /* 新增菜單樣式 */
+        .navbar {
+            position: sticky; /* 強制固定在頂部 */
+            top: 0;
+            background-color: #1C2D4E; /* 菜單的背景顏色 */
+            padding: 10px 0; /* 上下邊距 */
+            display: flex;
+            justify-content: center; /* 水平置中 */
+            align-items: center; /* 垂直置中 */
+            z-index: 1000; /* 確保菜單位於最上層 */
+        }
+
+        .navbar button {
+            background-color: #668B9B;
+            color: #FFDAB9;
+            border: none;
+            padding: 10px 15px; /* 按鈕內邊距 */
+            margin: 0 10px; /* 按鈕間距 */
+            cursor: pointer;
+            font-size: 16px; /* 增加字體大小 */
+        }
+
+        .content {
+            flex: 1; /* 使內容區域占滿剩餘空間 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #F5D07D;
+        }
+        
+        /* 以下是canvas的樣式設定 */
+        canvas {
+            border: 1px solid #F5D07D;
+            margin-top: 20px;
+            min-width: 256px;
+            min-height: 256px;
+            max-width: 512px;
+            max-height: 512px;
+        }
+
+        button {
+            background-color: #668B9B;
+            color: #FFDAB9;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        textarea {
+            background-color: #172B4B;
+            color: #F5D07D;
+            width: calc(70% - 70px); /* 調整寬度以便留出複製按鈕的空間 */
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        /* 複製按鈕調整位置 */
+        .copy-btn {
+            display: inline-block; /* 使其與 textarea 在同一行 */
+            margin-left: 10px; /* 左側邊距 */
+        }
+
+        /* 設定容器的顯示樣式 */
+        .example, .generate, .upload {
+            width: 100%;
+            max-width: 800px;
+            margin: 60px 0 20px 0; /* 增加上邊距 */
+            padding: 20px;
+            background-color: #1C2D4E;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 113, 196, 0.5);
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 菜單 -->
+    <div class="navbar">
+        <button onclick="scrollToSection('generate')">生成工具</button>
+        <button onclick="scrollToSection('upload')">上傳圖片以轉換為二進制</button>
+        <button onclick="scrollToTop()">Top</button>
+    </div>
+
+    <div class="content">
+        <!-- 範例區 -->
+        <div class="example" id="example"> 
+            <h2>範例</h2>
+            <img id="sampleImage" src="NekoNeko.png" 
+                 alt="範例圖片" style="width: 100px; height: 100px; margin-right: 20px;">
+            <textarea id="sampleBinaryOutput" rows="5" readonly>
+\x89 範例編碼</textarea>
+            <button class="copy-btn" onclick="copyToClipboard('#sampleBinaryOutput')">複製範例</button>
+        </div>
+
+        <!-- 生成工具區 -->
+        <div class="generate" id="generate"> 
+            <br><br>
+            <h2>生成工具</h2>
+            <form id="imageForm"> 
+                <label for="inputData">輸入數據（請輸入二進制編碼，例：\x89\x50\x4e\x47...）：</label>
+                <input type="text" id="inputData" required>
+                <button type="submit">生成</button>
+            </form>
+            <canvas id="outputCanvas"></canvas>
+            <br><br>
+            <button id="downloadBtn">下載圖片</button>
+        </div>
+
+        <!-- 圖片上傳區 -->
+        <div class="upload" id="upload"> 
+            <br><br>
+            <h2>上傳圖片以轉換為二進制</h2>
+            <input type="file" id="fileInput" accept="image/*">
+            <button id="convertBtn">轉換為二進制</button>
+            <h2>二進制代碼：</h2>
+            <textarea id="binaryOutput" rows="10" readonly></textarea>
+            <button class="copy-btn" onclick="copyToClipboard('#binaryOutput')">複製</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script> 
+    <script>
+        function copyToClipboard(selector) {
+            const textarea = document.querySelector(selector);
+            textarea.select();
+            document.execCommand('copy');
+            alert('已複製內容');
+        }
+
+        // 滾動到指定區域
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 返回頂部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

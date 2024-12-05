@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAT檔案生成</title>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', sans-serif; 
+            background-color: #172B4B; 
+            color: #F5D07D; 
+        }
+        input[type="text"], select {
+            width: 100px; 
+            background-color: #2C3E50; 
+            color: #F5D07D; 
+            border: 1px solid #668B9B; 
+        }
+        input[type="button"], button {
+            background-color: #668B9B; 
+            color: #FFDAB9; 
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        input[type="button"]:hover, button:hover {
+            background-color: #577f99; 
+        }
+        #preview {
+            width: 256px;
+            height: 256px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            background-size: cover;
+            background-position: center;
+            display: block; 
+        }
+        #shortcutLink {
+            display: block; 
+            margin-top: 10px; 
+            color: #FFDAB9; 
+        }
+    </style>
+</head>
+<body>
+    <h1>BAT檔案生成器</h1>
+    <h4><font color="#FF95CA">從 檔案右鍵 → 內容 → 安全性 → 物件名稱 → 整串複製起來</font></h4>
+    <form id="batForm">
+        <label for="fileCount">1. 選擇開啟檔案數量:</label>
+        <select id="fileCount" onchange="generateFileInputs()">
+            <option value="0">選擇數量</option>
+            <script>
+                for (let i = 1; i <= 20; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select><br>
+        <div id="fileInputs"></div>
+
+        <label for="interval">2. 連續開啟間隔:</label>
+        <input type="text" id="interval" value="3" placeholder="3" maxlength="2" style="color: gray;" onfocus="this.placeholder=''" onblur="this.placeholder='3'"><br><br>
+
+        <label for="autoClose">3. 自動關閉視窗:</label>
+        <input type="text" id="autoClose" value="5" placeholder="5" maxlength="2" style="color: gray;" onfocus="this.placeholder=''" onblur="this.placeholder='5'"><br><br>
+
+        <label for="shortcutName">4. 捷徑命名為:</label>
+        <input type="text" id="shortcutName" value="捷徑" placeholder="捷徑" maxlength="10" style="color: gray;" onfocus="this.placeholder=''" onblur="this.placeholder='捷徑'"><br><br>
+
+        <input type="button" value="製作成bat" onclick="createBatFile()"><br><br>
+
+        <!-- 下載 BAT 檔案按鈕 -->
+        <button id="downloadButton" style="display:none;" onclick="downloadBatFile()">下載 BAT 檔案</button><br><br>
+        
+        <a id="shortcutLink" download style="display:none;">下載捷徑</a>
+    </form>
+
+    <script>
+        let batFileContent = '';
+        let selectedIcon = null; // 移除選擇圖示的功能
+
+        function generateFileInputs() {
+            const count = document.getElementById('fileCount').value;
+            const container = document.getElementById('fileInputs');
+            container.innerHTML = '';
+
+            for (let i = 1; i <= count; i++) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.placeholder = `檔案路徑 ${i}`;
+                input.required = true;
+                container.appendChild(input);
+                container.appendChild(document.createElement('br'));
+            }
+        }
+
+        function createBatFile() {
+            const timeoutValue = document.getElementById('interval').value || 2; 
+            const autoCloseValue = document.getElementById('autoClose').value || 5; 
+            const shortcutName = document.getElementById('shortcutName').value || '捷徑'; 
+            batFileContent = ''; 
+
+            const fileInputs = document.querySelectorAll('#fileInputs input');
+
+            fileInputs.forEach(input => {
+                batFileContent += `start "" "${input.value}"\ntimeout /t ${timeoutValue} /nobreak >nul\n`;
+            });
+
+            // 添加自動關閉命令
+            batFileContent += `timeout /t ${autoCloseValue} /nobreak >nul\nexit\n`;
+
+            document.getElementById('downloadButton').style.display = 'block';
+        }
+
+        function downloadBatFile() {
+            const blob = new Blob([batFileContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const downloadLink = document.getElementById('shortcutLink');
+            downloadLink.href = url;
+            downloadLink.download = `${document.getElementById('shortcutName').value || '捷徑'}.bat`;  
+            downloadLink.click();
+        }
+    </script>
+</body>
+</html>

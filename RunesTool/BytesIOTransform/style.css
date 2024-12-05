@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+    background-color: #172B4B; /* 背景顏色 */
+}
+
+h1, h2 {
+    color: #F5D07D; /* 標題顏色 */
+}
+
+canvas {
+    margin-top: 20px;
+    border: 1px solid #F5D07D; /* Canvas 邊框顏色 */
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #668B9B; /* 按鈕背景顏色 */
+    color: #FFDAB9; /* 按鈕字體顏色 */
+    border: none;
+    cursor: pointer;
+}
+
+textarea {
+    background-color: #172B4B; /* 文本區背景色 */
+    color: #F5D07D; /* 文本區字體顏色 */
+}
+
+/* 設定容器的顯示樣式 */
+.example, .generate, .upload {
+    width: 100%;
+    max-width: 800px;
+    margin: 60px 0 20px 0; /* 增加上邊距 */
+    padding: 20px;
+    background-color: #1C2D4E;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 113, 196, 0.5);
+    position: relative;
+}
