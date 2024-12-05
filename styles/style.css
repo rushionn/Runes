@@ -111,6 +111,117 @@ a:visited {
 footer {
     text-align: center;
     padding: 10px 0;
+    background-color: #172B4B;
+    color: #F5D07D;
+}
+
+.article-pane {
+    border: 1px solid #F5D07D; /* 每篇文章的邊框顏色 */
+    border-radius: 8px; /* 邊框圓角 */
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #2C3E50; /* 文章背景 */
+}
+
+/* 文章標題的樣式 */
+.article-pane h3 {
+    margin: 0;
+}
+
+.article-pane a {
+    color: #F5D07D; /* 文章連結顏色 */
+    text-decoration: none;
+    font-size: 20px; /* 文章標題的大小 */
+}
+
+.article-pane a:hover {
+    text-decoration: underline; /* 懸停效果 */
+}
+
+body {
+    font-family: "微軟正黑體", Arial, sans-serif; /* 設定字體為微軟正黑體 */
+    margin: 0;
+    padding: 0;
+    background-color: #172B4B;
+    color: #F5D07D;
+    font-size: 20px; /* Main的所有字體大小調整 */
+}
+
+header {
     background-color: #2C3E50;
     color: #F5D07D;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    margin: 0 auto; /* 使整個容器置中 */
+}
+
+.sidebar {
+    width: 220px; /* 側邊欄固定寬度 - 可調整 */
+    background-color: #2C3E50;
+    padding: 15px;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    font-size: 18px; /* 旁邊菜單字體大小調整為稍大 */
+}
+
+main {
+    margin-left: 240px; /* 留出側邊欄位置 */
+    padding: 20px;
+    text-align: center; /* 預設將主內容置中 */
+    width: calc(100% - 240px); /* 確保主內容不會超過右側 */
+}
+
+/* 文章窗格的樣式 */
+.article-pane {
+    border: 1px solid #F5D07D; /* 每篇文章的邊框顏色 */
+    border-radius: 8px; /* 邊框圓角 */
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #2C3E50; /* 文章背景 */
+}
+
+/* 頁碼的樣式 */
+.pagination {
+    margin-top: 20px;
+    text-align: center; /* 頁碼置中 */
+}
+
+.page-link {
+    margin: 0 5px; /* 每一頁碼之間的間距 */
+    color: #F5D07D;
+    text-decoration: none; /* 移除超連結底線 */
+}
+
+.page-link:hover {
+    text-decoration: underline; /* 懸停效果 */
+}
+
+.article-image {
+    float: left; /* 讓圖片在左側顯示 */
+    margin-right: 15px; /* 右側留一些空間 */
+    width: 128px; /* 預設寬度 */
+    height: 256px; /* 預設高度 */
+}
+
+/* 為了讓圖片與文字的顯示更美觀 */
+article {
+    clear: both; /* 清除浮動，確保文章底部不被圖片影響 */
+    padding-bottom: 20px; /* 文章末端增加一些空間 */
+}
+
+.footer-text {
+    text-align: center; /* 頁腳居中 */
+    padding: 10px 0; /* 增加上下邊距 */
+}
+
+.pagination {
+    text-align:center;
+    margin-top: 20px; /* 調整頁碼顯示的邊距 */
 }

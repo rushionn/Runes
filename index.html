@@ -12,11 +12,11 @@
     </header>
     <div class="container">
         <nav class="sidebar">
-            <div class="avatar-text"> <!-- 大頭貼上方空間 - 可輸入文字 -->
+            <div class="avatar-text">
                 <span>　　　</span>
             </div>
-            <div class="avatar"></div> <!-- 圓形大頭貼占位符 -->
-            <div class="avatar-text"> <!-- 大頭貼下方空間 - 可輸入文字 -->
+            <div class="avatar"></div>
+            <div class="avatar-text">
                 <span>Rushionn</span>
             </div>
             <div class="social-icons">
@@ -27,35 +27,101 @@
                 <a href="#icon5"><svg>...</svg></a>
                 <a href="#icon6"><svg>...</svg></a>
             </div>
-            <button onclick="location.href='#home'">Home</button> <!-- 按鈕的文字未來也可以更改 -->
+            <button onclick="location.href='#home'">Home</button>
             <button onclick="location.href='#about'">About</button>
             <button onclick="location.href='#contact'">Contact</button>
             <div class="search-container">
-                <label for="search">　　　</label><!-- 搜尋欄位上方空間，可輸入文字 -->
+                <label for="search">　　　</label>
                 <input type="text" id="search" placeholder="輸入搜尋內容...">
             </div>
-            <div class="avatar-text"> <!-- 下方空間 - 提示未來添加用戶信息 -->
-                <span>用戶信息或標語</span>
+            <div class="avatar-text">
+                <span>        <p class="footer-text">&copy; Rushionn's Ai Theme</p></span>
             </div>
         </nav>
         <main>
-            <section id="home">
-                <h2>Home Section</h2>
-                <p>This is the home section of the page.</p>
-            </section>
-            <section id="about">
-                <h2>About Section</h2>
-                <p>Information about the website.</p>
-            </section>
-            <section id="contact">
-                <h2>Contact Section</h2>
-                <p>Contact us at example@example.com.</p>
-            </section>
+            <div id="article-container"></div>
+            <div class="pagination">
+                <span id="page-info">第</span>
+                <span id="page-number"></span>
+                <span>頁</span>
+            </div>
         </main>
     </div>
-    <footer>
-        <p>&copy; Rushionn's Ai Theme</p>
-    </footer>
+
     <script src="js/script.js"></script>
+    <script>
+        const articles = [
+            // 模擬從資料夾讀取的文章，實際用時應使用 AJAX 認識文件讀取
+            { title: "HTML 基礎教學", url: "articles/article1.html" },
+            { title: "CSS 基礎教學", url: "articles/article2.html" },
+            { title: "JavaScript 基礎教學", url: "articles/article3.html" },
+            // 這裡可以添加更多文章...
+        ];
+        
+        const articlesPerPage = 10;
+        let currentPage = 1;
+
+        function loadArticles(page) {
+            const start = (page - 1) * articlesPerPage;
+            const end = start + articlesPerPage;
+            const paginatedArticles = articles.slice(start, end);
+
+            const container = document.getElementById('article-container');
+            container.innerHTML = ""; // 清空容器
+            
+            paginatedArticles.forEach(article => {
+                const div = document.createElement('div');
+                div.className = 'article-pane';
+                div.innerHTML = `
+                    <h3><a href="${article.url}" class="article-link" onclick="loadArticle(event, '${article.url}')">${article.title}</a></h3>
+                    <p>這是一段關於 ${article.title} 的簡短描述。</p>
+                `;
+                container.appendChild(div);
+            });
+            generatePagination();
+        }
+
+        function generatePagination() {
+            const totalPages = Math.ceil(articles.length / articlesPerPage);
+            const pageNumberContainer = document.getElementById('page-number');
+            pageNumberContainer.innerHTML = ""; // 清空頁碼容器
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageLink = document.createElement('a');
+                pageLink.href = "#";
+                pageLink.innerHTML = i;
+                pageLink.classList.add('page-link');
+                pageLink.onclick = (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    loadArticles(currentPage);
+                };
+                pageNumberContainer.appendChild(pageLink);
+                if (i < totalPages) {
+                    pageNumberContainer.appendChild(document.createTextNode(" ")); // 添加空格
+                }
+            }
+        }
+
+        function loadArticle(event, url) {
+            event.preventDefault();
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.querySelector('main').innerHTML = data;
+                    // 加入返回按鈕
+                    const backButton = document.createElement('button');
+                    backButton.textContent = "返回文章列表";
+                    backButton.onclick = () => {
+                        loadArticles(currentPage);
+                    };
+                    document.querySelector('main').appendChild(backButton);
+                })
+                .catch(error => console.error('Error loading article:', error));
+        }
+
+        // 初始載入
+        loadArticles(currentPage);
+    </script>
 </body>
 </html>
