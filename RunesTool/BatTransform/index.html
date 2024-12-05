@@ -9,9 +9,17 @@
             font-family: 'Microsoft JhengHei', sans-serif; 
             background-color: #172B4B; 
             color: #F5D07D; 
+            text-align: left; /* 使內容靠左對齊 */
+        }
+        #container {
+            margin: 0 auto; /* 使容器居中 */
+            width: 300px; /* 設置適當的寬度 */
+            padding: 20px; /* 增加內邊距 */
+            background-color: #2C3E50; /* 容器背景顏色 */
+            border-radius: 5px; /* 圓角邊框 */
         }
         input[type="text"], select {
-            width: 100px; 
+            width: 100%; /* 使輸入框寬度為100% */
             background-color: #2C3E50; 
             color: #F5D07D; 
             border: 1px solid #668B9B; 
@@ -22,6 +30,7 @@
             border: none;
             padding: 5px 10px;
             cursor: pointer;
+            width: 100%; /* 使按鈕寬度為100% */
         }
         input[type="button"]:hover, button:hover {
             background-color: #577f99; 
@@ -45,34 +54,35 @@
 <body>
     <h1>BAT檔案生成器</h1>
     <h4><font color="#FF95CA">從 檔案右鍵 → 內容 → 安全性 → 物件名稱 → 整串複製起來</font></h4>
-    <form id="batForm">
-        <label for="fileCount">1. 選擇開啟檔案數量:</label>
-        <select id="fileCount" onchange="generateFileInputs()">
-            <option value="0">選擇數量</option>
-            <script>
-                for (let i = 1; i <= 20; i++) {
-                    document.write(`<option value="${i}">${i}</option>`);
-                }
-            </script>
-        </select><br>
-        <div id="fileInputs"></div>
+    <div id="container">
+        <form id="batForm">
+            <label for="fileCount">1. 選擇開啟檔案數量:</label>
+            <select id="fileCount" onchange="generateFileInputs()">
+                <option value="0">選擇數量</option>
+                <script>
+                    for (let i = 1; i <= 20; i++) {
+                        document.write(`<option value="${i}">${i}</option>`);
+                    }
+                </script>
+            </select><br>
+            <div id="fileInputs"></div>
 
-        <label for="interval">2. 連續開啟間隔:</label>
-        <input type="text" id="interval" value="3" placeholder="3" maxlength="2" style="color: gray;" onfocus="this.placeholder=''" onblur="this.placeholder='3'"><br><br>
+            <label for="interval">2. 連續開啟間隔:</label>
+            <input type="text" id="interval" value="3" placeholder="3" maxlength="2" onfocus="this.placeholder=''" onblur="this.placeholder='3'"><br><br>
 
-        <label for="autoClose">3. 自動關閉視窗:</label>
-        <input type="text" id="autoClose" value="5" placeholder="5" maxlength="2" style="color: gray;" onfocus="this.placeholder=''" onblur="this.placeholder='5'"><br><br>
+            <label for="autoClose">3. 自動關閉視窗:</label>
+            <input type="text" id="autoClose" value="5" placeholder="5" maxlength="2" onfocus="this.placeholder=''" onblur="this.placeholder='5'"><br><br>
 
-        <label for="shortcutName">4. 捷徑命名為:</label>
-        <input type="text" id="shortcutName" value="捷徑" placeholder="捷徑" maxlength="10" style="color: gray;" onfocus="this.placeholder=''" onblur="this.placeholder='捷徑'"><br><br>
+            <label for="shortcutName">4. 捷徑命名為:</label>
+            <input type="text" id="shortcutName" value="捷徑" placeholder="捷徑" maxlength="10" onfocus="this.placeholder=''" onblur="this.placeholder='捷徑'"><br><br>
 
-        <input type="button" value="製作成bat" onclick="createBatFile()"><br><br>
+            <input type="button" value="製作成bat" onclick="createBatFile()"><br><br>
 
-        <!-- 下載 BAT 檔案按鈕 -->
-        <button id="downloadButton" style="display:none;" onclick="downloadBatFile()">下載 BAT 檔案</button><br><br>
-        
-        <a id="shortcutLink" download style="display:none;">下載捷徑</a>
-    </form>
+            <button id="downloadButton" style="display:none;" onclick="downloadBatFile()">下載 BAT 檔案</button><br><br>
+            
+            <a id="shortcutLink" download style="display:none;">下載捷徑</a>
+        </form>
+    </div>
 
     <script>
         let batFileContent = '';
