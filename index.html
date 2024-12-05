@@ -28,12 +28,13 @@
                 <a href="#icon6"><svg>...</svg></a>
             </div>
             <button onclick="location.href='#home'">Home</button>
+            <button onclick="location.href='#runestool'">RunesTool</button>
             <button onclick="location.href='#about'">About</button>
-            <button onclick="location.href='#contact'">Contact</button>
             <div class="search-container">
                 <label for="search">　　　</label>
                 <input type="text" id="search" placeholder="輸入搜尋內容...">
             </div>
+            <br><br><br><br><br><br>
             <div class="avatar-text">
                 <span>        <p class="footer-text">&copy; Rushionn's Ai Theme</p></span>
             </div>
@@ -109,11 +110,12 @@
                 .then(response => response.text())
                 .then(data => {
                     document.querySelector('main').innerHTML = data;
+
                     // 加入返回按鈕
                     const backButton = document.createElement('button');
-                    backButton.textContent = "返回文章列表";
+                    backButton.textContent = "返回上一頁";
                     backButton.onclick = () => {
-                        loadArticles(currentPage);
+                        loadArticles(currentPage); // 確保返回的頁碼正確
                     };
                     document.querySelector('main').appendChild(backButton);
                 })

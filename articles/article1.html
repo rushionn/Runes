@@ -4,10 +4,22 @@
     <meta charset="UTF-8">
     <title>HTML 基礎教學</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <style>
+        .article-image {
+            background-color: #ccc; /* 背景顏色 */
+            width: 128px; /* 圖片寬度 */
+            height: 256px; /* 圖片高度 */
+            display: flex; /* 使其為彈性容器 */
+            justify-content: center; /* 垂直置中 */
+            align-items: center; /* 水平置中 */
+        }
+    </style>
 </head>
 <body>
     <article>
-        <img src="your-image-url.jpg" alt="HTML 基礎教學圖片" width="128" height="256" class="article-image">
+        <div class="article-image">
+            <img src="your-image-url.gif" alt="HTML 基礎教學圖片" width="128" height="256">
+        </div>
         <h1>HTML 基礎教學</h1>
         <p>HTML（超文本標記語言）是構建網站的基礎。它用來描述網頁的結構。</p>
         <h2>基本標記</h2>

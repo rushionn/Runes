@@ -1,227 +1,181 @@
+/* 主體樣式設定 */
 body {
     font-family: "微軟正黑體", Arial, sans-serif; /* 設定字體為微軟正黑體 */
     margin: 0;
     padding: 0;
-    background-color: #172B4B;
-    color: #F5D07D;
-    font-size: 20px; /* Main的所有字體大小調整 */
+    background-color: #172B4B; /* 背景顏色 */
+    color: #F5D07D; /* 文字顏色 */
+    font-size: 20px; /* 主內容字體大小 */
 }
 
+/* 頁首樣式 */
 header {
-    background-color: #2C3E50;
-    color: #F5D07D;
-    padding: 10px 0;
-    text-align: center;
+    background-color: #2C3E50; /* 頁首背景顏色 */
+    color: #F5D07D; /* 頁首文字顏色 */
+    padding: 10px 0; /* 上下內邊距 */
+    text-align: center; /* 文字置中 */
 }
 
+/* 主要容器樣式 */
 .container {
-    display: flex;
+    display: flex; /* 使用彈性盒模型 */
+    margin: 0 auto; /* 容器置中 */
 }
 
+/* 側邊欄樣式 */
 .sidebar {
     width: 220px; /* 側邊欄固定寬度 - 可調整 */
-    background-color: #2C3E50;
-    padding: 15px;
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    font-size: 18px; /* 旁邊菜單字體大小調整為稍大 */
+    background-color: #2C3E50; /* 側邊欄背景顏色 */
+    padding: 15px; /* 側邊欄內邊距 */
+    position: fixed; /* 固定定位 */
+    height: 100%; /* 高度設為100% */
+    top: 0; /* 到頁面頂部 */
+    left: 0; /* 到頁面左側 */
+    z-index: 1000; /* z-index層級 */
+    font-size: 18px; /* 旁邊菜單字體大小 */
 }
 
-/* 大頭貼的樣式 */
+/* 大頭貼樣式 */
 .avatar {
-    width: 128px; 
-    height: 128px;
-    border-radius: 50%;
-    background-color: #bbb;
-    margin-bottom: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto; /* 使大頭貼置中 */
+    width: 128px; /* 大頭貼寬度 */
+    height: 128px; /* 大頭貼高度 */
+    border-radius: 50%; /* 圓形效果 */
+    background-color: #bbb; /* 背景顏色 */
+    margin-bottom: 20px; /* 下方間距 */
+    display: block; /* 使其為區塊元素 */
+    margin-left: auto; /* 左邊自動間距以置中 */
+    margin-right: auto; /* 右邊自動間距以置中 */
 }
 
-/* 預留的文字空間樣式 */
+/* 文字樣式 */
 .avatar-text {
-    text-align: center; /* 文字置中對齊 */
-    font-size: 14px; /* 文字大小 - 可調整 */
-    margin-bottom: 20px; /* 與下方元素的間距 */
+    text-align: center; /* 文字置中 */
+    font-size: 14px; /* 字體大小 */
+    margin-bottom: 20px; /* 下方間距 */
 }
 
 /* 按鈕樣式 */
 .sidebar button {
-    background-color: #2C3E50;
-    color: #F5D07D;
-    border: none;
-    padding: 10px;
-    margin: 10px 0;
-    width: 100%;
-    cursor: pointer;
-    font-size: 28px; /* 按鈕文字大小調整，與主內容一致 */
+    background-color: #2C3E50; /* 按鈕背景顏色 */
+    color: #F5D07D; /* 按鈕文字顏色 */
+    border: none; /* 無邊框 */
+    padding: 10px; /* 內邊距 */
+    margin: 10px 0; /* 上下間距 */
+    width: 100%; /* 寬度100% */
+    cursor: pointer; /* 鼠標指針為手型 */
+    font-size: 28px; /* 按鈕文字大小 */
 }
 
-/* 鼠標懸停效果 */
+/* 按鈕懸停效果 */
 .sidebar button:hover {
-    background-color: #668B9B; 
+    background-color: #668B9B; /* 鼠標懸停時顏色 */
 }
 
-/* 社交圖標的樣式 */
+/* 社交圖標樣式 */
 .social-icons {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    max-width: 100%;
-    overflow: hidden;
+    display: flex; /* 彈性盒模型 */
+    justify-content: space-between; /* 使其橫向均勻分布 */
+    margin-bottom: 20px; /* 下方間距 */
+    max-width: 100%; /* 最大寬度 */
+    overflow: hidden; /* 溢出隱藏 */
 }
 
 .social-icons a {
-    width: 40px;
-    height: 40px;
+    width: 40px; /* 圖標寬度 */
+    height: 40px; /* 圖標高度 */
 }
 
 /* 主內容區域樣式 */
 main {
     margin-left: 240px; /* 留出側邊欄位置 */
-    padding: 20px;
-    text-align: center; /* 預設將主內容置中 */
+    padding: 20px; /* 內邊距 */
+    text-align: center; /* 文字置中 */
+    width: calc(100% - 240px); /* 確保主內容不會超過右側 */
 }
 
-/* 搜索框及標籤 */
+/* 搜索框樣式 */
 .search-container {
-    margin-top: 20px;
+    margin-top: 20px; /* 上方間距 */
 }
 
 #search {
-    padding: 5px;
-    width: 100%;
+    padding: 5px; /* 內邊距 */
+    width: 100%; /* 寬度100% */
 }
 
-/* 超連結的樣式 */
+/* 超連結樣式 */
 a {
-    color: #F5D07D;
-    text-decoration: none;
+    color: #F5D07D; /* 超連結顏色 */
+    text-decoration: none; /* 移除底線 */
 }
 
 a:visited {
-    color: #FF95CA;
+    color: #FF95CA; /* 已訪問的超連結顏色 */
 }
 
 /* 頁腳樣式 */
 footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #172B4B;
-    color: #F5D07D;
+    text-align: center; /* 文字置中 */
+    padding: 10px 0; /* 上下內邊距 */
+    background-color: #172B4B; /* 頁腳背景顏色 */
+    color: #F5D07D; /* 頁腳文字顏色 */
 }
 
+/* 文章窗格樣式 */
 .article-pane {
     border: 1px solid #F5D07D; /* 每篇文章的邊框顏色 */
     border-radius: 8px; /* 邊框圓角 */
-    margin: 20px 0;
-    padding: 15px;
+    margin: 20px 0; /* 上下間距 */
+    padding: 15px; /* 內邊距 */
     background-color: #2C3E50; /* 文章背景 */
 }
 
-/* 文章標題的樣式 */
+/* 文章標題樣式 */
 .article-pane h3 {
-    margin: 0;
+    margin: 0; /* 移除默認邊距 */
 }
 
 .article-pane a {
     color: #F5D07D; /* 文章連結顏色 */
-    text-decoration: none;
-    font-size: 20px; /* 文章標題的大小 */
+    text-decoration: none; /* 移除底線 */
+    font-size: 20px; /* 文章標題大小 */
 }
 
 .article-pane a:hover {
     text-decoration: underline; /* 懸停效果 */
 }
 
-body {
-    font-family: "微軟正黑體", Arial, sans-serif; /* 設定字體為微軟正黑體 */
-    margin: 0;
-    padding: 0;
-    background-color: #172B4B;
-    color: #F5D07D;
-    font-size: 20px; /* Main的所有字體大小調整 */
-}
-
-header {
-    background-color: #2C3E50;
-    color: #F5D07D;
-    padding: 10px 0;
-    text-align: center;
-}
-
-.container {
-    display: flex;
-    margin: 0 auto; /* 使整個容器置中 */
-}
-
-.sidebar {
-    width: 220px; /* 側邊欄固定寬度 - 可調整 */
-    background-color: #2C3E50;
-    padding: 15px;
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    font-size: 18px; /* 旁邊菜單字體大小調整為稍大 */
-}
-
-main {
-    margin-left: 240px; /* 留出側邊欄位置 */
-    padding: 20px;
-    text-align: center; /* 預設將主內容置中 */
-    width: calc(100% - 240px); /* 確保主內容不會超過右側 */
-}
-
-/* 文章窗格的樣式 */
-.article-pane {
-    border: 1px solid #F5D07D; /* 每篇文章的邊框顏色 */
-    border-radius: 8px; /* 邊框圓角 */
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #2C3E50; /* 文章背景 */
-}
-
-/* 頁碼的樣式 */
+/* 分頁樣式 */
 .pagination {
-    margin-top: 20px;
+    margin-top: 20px; /* 上方間距 */
     text-align: center; /* 頁碼置中 */
 }
 
 .page-link {
-    margin: 0 5px; /* 每一頁碼之間的間距 */
-    color: #F5D07D;
-    text-decoration: none; /* 移除超連結底線 */
+    margin: 0 5px; /* 每頁碼之間的間距 */
+    color: #F5D07D; /* 頁碼顏色 */
+    text-decoration: none; /* 移除底線 */
 }
 
 .page-link:hover {
     text-decoration: underline; /* 懸停效果 */
 }
 
+/* 文章圖片樣式 */
 .article-image {
-    float: left; /* 讓圖片在左側顯示 */
-    margin-right: 15px; /* 右側留一些空間 */
+    float: left; /* 左側圖片 */
+    margin-right: 15px; /* 右側留空間 */
     width: 128px; /* 預設寬度 */
     height: 256px; /* 預設高度 */
 }
 
-/* 為了讓圖片與文字的顯示更美觀 */
+/* 文章樣式 */
 article {
-    clear: both; /* 清除浮動，確保文章底部不被圖片影響 */
-    padding-bottom: 20px; /* 文章末端增加一些空間 */
+    clear: both; /* 清除浮動 */
+    padding-bottom: 20px; /* 增加底部空間 */
 }
 
 .footer-text {
-    text-align: center; /* 頁腳居中 */
+    text-align: center; /* 頁腳文字置中 */
     padding: 10px 0; /* 增加上下邊距 */
-}
-
-.pagination {
-    text-align:center;
-    margin-top: 20px; /* 調整頁碼顯示的邊距 */
 }
