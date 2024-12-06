@@ -71,6 +71,17 @@
             font-size: 32px; 
             cursor: pointer; 
         }
+
+        /* 新增顯示提示的樣式 */
+        .tooltip {
+            position: absolute;
+            background-color: #2C3E50;
+            color: #F5D07D;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: none; /* 初始隱藏 */
+            z-index: 10;
+        }
     </style>
     <audio id="click-sound" src="sound/click.mp3" preload="auto"></audio>
 </head>
@@ -98,33 +109,29 @@
             <button id="homeButton" onclick="loadHome()">Home</button>
             <button id="runesToolButton" onclick="toggleRunesToolList()">RunesTool</button>
             <div id="runesToolList" class="dropdown-list">
-                <a href="#" onclick="loadRunesTool('RunesTool/BatTransform/index.html')">BatTransform</a>
-                <a href="#" onclick="loadRunesTool('RunesTool/BytesIOTransform/index.html')">BytesIOTransform</a>
+                <a href="#" onclick="loadRunesTool('RunesTool/BatTransform/index.html')" onmouseover="showTooltip(event, 'BatTransform')">Bat捷徑製作</a>
+                <a href="#" onclick="loadRunesTool('RunesTool/BytesIOTransform/index.html')" onmouseover="showTooltip(event, 'BytesIOTransform')">圖片轉換二進制</a>
                 <a># 尚未新增</a>
             </div>
             <button onclick="loadAbout()">About</button>
 
-            <!-- 隱藏搜尋功能 -->
             <div class="search-container" style="display: none;">
                 <label for="search">　　　</label>
                 <input type="text" id="search" placeholder="輸入搜尋內容...">
             </div>
             
-            <!-- GIF 預覽功能 -->
             <div class="gif-preview" onclick="playClickSound()">
                 <img src="Runes/assets/dynamic-image/gif1.gif" alt="GIF 1">
-                <!-- 額外GIF圖片的位置 -->
                 <img src="Runes/assets/dynamic-image/gif2.gif" alt="GIF 2" style="display:none;">
                 <img src="Runes/assets/dynamic-image/gif3.gif" alt="GIF 3" style="display:none;">
                 <img src="Runes/assets/dynamic-image/gif4.gif" alt="GIF 4" style="display:none;">
                 <img src="Runes/assets/dynamic-image/gif5.gif" alt="GIF 5" style="display:none;">
-                <p style="text-align: center;">點擊以播放音效</p>
             </div>
             <div class="avatar-text">
-                <span><p class="footer-text">&copy; Rushionn's Ai Theme</p></span>
+                <span><p class="footer-text">&copy; Ai Warlock － Rushionn</p></span>
             </div>
         </nav>
-        <main id="embedded-content" style="border: 1px solid #ccc; padding: 20px;">
+        <main id="embedded-content" style="border: none; padding: 20px;">
             <h2>嵌入的文章標題</h2>
             <iframe src="https://example.com" width="100%" height="600" style="border:none;"></iframe>
             <p>這裡是嵌入的文章內容示範，您可以替換為其他網站或文章的URL。</p>
@@ -140,12 +147,10 @@
         }
 
         function openLink(link) {
-            // 可以加載其它內容，此處可根據需要編寫
             loadEmbeddedContent(link);
         }
 
         function loadHome() {
-            // 清空主內容
             const mainContent = document.getElementById('embedded-content');
             mainContent.innerHTML = `
                 <h2>嵌入的文章標題</h2>
@@ -174,6 +179,19 @@
         function playClickSound() {
             const sound = document.getElementById('click-sound');
             sound.play();
+        }
+
+        function showTooltip(event, text) {
+            let tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.innerHTML = text;
+            document.body.appendChild(tooltip);
+            tooltip.style.left = event.pageX + 'px';
+            tooltip.style.top = (event.pageY - 30) + 'px';
+            tooltip.style.display = 'block';
+            event.target.onmouseout = function() {
+                tooltip.remove();
+            }
         }
 
         // 初始載入首頁內容
