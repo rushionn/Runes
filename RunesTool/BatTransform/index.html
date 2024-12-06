@@ -49,6 +49,9 @@
             margin-top: 10px; 
             color: #FFDAB9; 
         }
+        #batForm {
+            text-align: left; /* 將文本設置為左對齊 */
+        }
     </style>
 </head>
 <body>
@@ -66,18 +69,18 @@
                 </script>
             </select><br>
             <div id="fileInputs"></div>
-
+    
             <label for="interval">2. 連續開啟間隔:</label>
             <input type="text" id="interval" value="3" placeholder="3" maxlength="2" onfocus="this.placeholder=''" onblur="this.placeholder='3'"><br><br>
-
+    
             <label for="autoClose">3. 自動關閉視窗:</label>
             <input type="text" id="autoClose" value="5" placeholder="5" maxlength="2" onfocus="this.placeholder=''" onblur="this.placeholder='5'"><br><br>
-
+    
             <label for="shortcutName">4. 捷徑命名為:</label>
             <input type="text" id="shortcutName" value="捷徑" placeholder="捷徑" maxlength="10" onfocus="this.placeholder=''" onblur="this.placeholder='捷徑'"><br><br>
-
+    
             <input type="button" value="製作成bat" onclick="createBatFile()"><br><br>
-
+    
             <button id="downloadButton" style="display:none;" onclick="downloadBatFile()">下載 BAT 檔案</button><br><br>
             
             <a id="shortcutLink" download style="display:none;">下載捷徑</a>

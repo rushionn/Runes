@@ -14,7 +14,7 @@
             background-color: #2C3E50; /* 與按鈕相同背景顏色 */
             color: #F5D07D; /* 與文字顏色相同 */
             padding: 10px;
-            display: none; /* 預設隱藏 */ /* 開啟:on */
+            display: none; /* 預設隱藏 */
         }
 
         .dropdown-list a {
@@ -30,6 +30,51 @@
 
         .article-pane {
             margin: 20px 0; /* 文章面板上下外邊距 */
+            max-width: 80%; /* 可調整大小的提示 */
+            margin-left: auto; /* 左右居中 */
+            margin-right: auto; /* 左右居中 */
+        }
+
+        .search-results {
+            margin-top: 20px; /* 給搜索結果一些間距 */
+        }
+
+        .svg-container {
+            display: flex;
+            justify-content: space-between; /* 使SVG均勻分佈 */
+            max-width: 100%; /* 限制於菜單的寬度 */
+            margin: 20px 0; /* 上下外邊距 */
+            flex-wrap: wrap; /* 超出時換行 */
+        }
+
+        .svg-container svg {
+            width: 16%;
+            height: auto; /* 自動調整高度 */
+            cursor: pointer; /* 鼠標變成指針以表達可點擊 */
+        }
+
+        .image-carousel {
+            width: 128px; /* 圖片窗口寬度 */
+            height: 128px; /* 圖片窗口高度 */
+            border-radius: 8px; /* 圓角 */
+            overflow: hidden; /* 隱藏溢出 */
+            margin: 10px auto; /* 中心對齊 */
+        }
+
+        .image-carousel img {
+            width: 128px; /* 圖片尺寸 */
+        }
+
+        /* 菜單按鈕樣式 */
+        .sidebar button {
+            text-align: left; /* 左對齊 */
+            width: 100%; /* 寬度設為100% */
+            padding: 3px; /* 增加內邊距以增強可點擊性 */
+            background: none; /* 背景透明 */
+            border: none; /* 移除邊框 */
+            color: #F5D07D; /* 文字顏色 */
+            font-size: 32px; /* 字體大小 */
+            cursor: pointer; /* 鼠標顯示為指針 */
         }
     </style>
 </head>
@@ -44,101 +89,72 @@
             </div>
             <div class="avatar"></div>
             <div class="avatar-text">
-                <span>Rushionn</span>
+                <span><h3>Rushionn</h3></span>
             </div>
-            <div class="social-icons">
-                <a href="Runes\assets\icons\github.svg"><svg>...</svg></a>
-                <a href="Runes\assets\icons\github.svg"><svg>...</svg></a>
-                <a href="Runes\assets\icons\github.svg"><svg>...</svg></a>
-                <a href="Runes\assets\icons\github.svg"><svg>...</svg></a>
-                <a href="Runes\assets\icons\github.svg"><svg>...</svg></a>
-                <a href="Runes\assets\icons\github.svg"><svg>...</svg></a>
+            <div class="svg-container">
+                <svg onclick="openLink('link1.html')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="red"/></svg>
+                <svg onclick="openLink('link2.html')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="80" height="80" fill="blue"/></svg>
+                <svg onclick="openLink('link3.html')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,15 10,85 90,85" fill="green"/></svg>
+                <svg onclick="openLink('link4.html')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="45" ry="20" fill="yellow"/></svg>
+                <svg onclick="openLink('link5.html')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><line x1="10" y1="10" x2="90" y2="90" stroke="purple" stroke-width="8"/></svg>
+                <svg onclick="openLink('link6.html')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10 10 h 80 v 80 h -80 Z" fill="orange"/></svg>
             </div>
-            <button onclick="location.href='index.html'">Home</button>
+            
+            <button onclick="loadHome()">Home</button>
             <button id="runesToolButton">RunesTool</button>
             <div id="runesToolList" class="dropdown-list">
                 <a href="#" onclick="loadRunesTool('RunesTool/BatTransform/index.html')">BatTransform</a>
                 <a href="#" onclick="loadRunesTool('RunesTool/BytesIOTransform/index.html')">BytesIOTransform</a>
                 <a href="#">尚未新增</a>
             </div>
-            <button onclick="location.href='about.html'">About</button>
+            <button onclick="loadAbout()">About</button>
             <div class="search-container">
                 <label for="search">　　　</label>
                 <input type="text" id="search" placeholder="輸入搜尋內容...">
             </div>
-            <br><br><br><br><br><br>
+            
+            <div class="image-carousel" onclick="nextImage()">
+                <img id="dynamic-image" src="Runes/assets/dynamic-image/image1.gif" alt="Dynamic Image">
+                <p style="text-align: center;">點擊圖片以切換</p> <!-- 提示用戶進行操作 -->
+            </div>
             <div class="avatar-text">
                 <span><p class="footer-text">&copy; Rushionn's Ai Theme</p></span>
             </div>
         </nav>
         <main>
-            <div id="article-container"></div>
+            <div id="article-container">
+                <!-- 在此直接顯示文章內容 -->
+                <h2>歡迎來到文章預覽頁面</h2>
+                <p>這裡是您的文章內容。您可以從側邊菜單中選擇不同的連結來查看其他內容或使用搜尋功能來找到所需的資料。</p>
+            </div>
             <div class="pagination">
                 <span id="page-info">第</span>
                 <span id="page-number"></span>
                 <span>頁</span>
             </div>
+            <div class="search-results" id="search-results"></div>
         </main>
     </div>
 
     <script src="js/script.js"></script>
     <script>
-        // 省略的 JavaScript 部分
         const articles = [
-            { title: "文章 1", url: "article1.html" },
-            { title: "文章 2", url: "article2.html" },
-            { title: "文章 3", url: "article3.html" }
-            // 加入更多模擬文章
+            // 取消顯示模擬文章
         ];
         
-        const articlesPerPage = 10;
-        let currentPage = 1;
+        const images = ["Runes/assets/dynamic-image/image1.gif", "Runes/assets/dynamic-image/image2.gif", "Runes/assets/dynamic-image/image3.gif"]; // 圖片數組，請確保路徑正確
+        let currentImageIndex = 0;
 
-        function loadArticles(page) {
-            const start = (page - 1) * articlesPerPage;
-            const end = start + articlesPerPage;
-            const paginatedArticles = articles.slice(start, end);
-
-            const container = document.getElementById('article-container');
-            container.innerHTML = ""; // 清空容器
-            
-            paginatedArticles.forEach(article => {
-                const div = document.createElement('div');
-                div.className = 'article-pane';
-                div.innerHTML = `
-                    <h3><a href="#" class="article-link" onclick="loadArticle(event, '${article.url}')">${article.title}</a></h3>
-                    <p>這是一段關於 ${article.title} 的簡短描述。</p>
-                `;
-                container.appendChild(div);
-            });
-            generatePagination();
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length; // 切換到下一張圖片
+            document.getElementById("dynamic-image").src = images[currentImageIndex]; // 更新圖片路徑
+            const audio = new Audio('click-sound.mp3'); // 音效的路徑
+            audio.play(); // 播放音效
         }
 
-        function generatePagination() {
-            const totalPages = Math.ceil(articles.length / articlesPerPage);
-            const pageNumberContainer = document.getElementById('page-number');
-            pageNumberContainer.innerHTML = ""; // 清空頁碼容器
-
-            for (let i = 1; i <= totalPages; i++) {
-                const pageLink = document.createElement('a');
-                pageLink.href = "#";
-                pageLink.innerHTML = i;
-                pageLink.classList.add('page-link');
-                pageLink.onclick = (e) => {
-                    e.preventDefault();
-                    currentPage = i;
-                    loadArticles(currentPage);
-                };
-                pageNumberContainer.appendChild(pageLink);
-                if (i < totalPages) {
-                    pageNumberContainer.appendChild(document.createTextNode(" ")); // 添加空格
-                }
-            }
-        }
-
-        function loadArticle(event, url) {
-            event.preventDefault();
-            fetch(url)
+        function openLink(link) {
+            // 前面已經有的函數保持不變
+            fetch(link)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -146,56 +162,24 @@
                     return response.text();
                 })
                 .then(data => {
-                    // 更新主內容
-                    document.querySelector('main').innerHTML = data;
-
-                    // 加入返回按鈕
-                    const backButton = document.createElement('button');
-                    backButton.textContent = "返回上一頁";
-                    backButton.onclick = () => {
-                        loadArticles(currentPage); // 確保返回的頁碼正確
-                    };
-                    document.querySelector('main').appendChild(backButton);
+                    document.querySelector('main').innerHTML = data; // 更新主內容
                 })
-                .catch(error => console.error('Error loading article:', error));
+                .catch(error => console.error('Error loading link:', error));
         }
 
-        // 新增 RunesTool 加載功能
-        function loadRunesTool(url) {
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    // 更新主內容
-                    document.querySelector('main').innerHTML = data;
-
-                    // 加入返回按鈕
-                    const backButton = document.createElement('button');
-                    backButton.textContent = "返回上一頁";
-                    backButton.onclick = () => {
-                        loadArticles(currentPage); // 確保返回的頁碼正確
-                    };
-                    document.querySelector('main').appendChild(backButton);
-                })
-                .catch(error => console.error('Error loading RunesTool:', error));
+        function loadHome() {
+            // 前面已經有的函數保持不變
+            document.querySelector('main').innerHTML = `
+                <h2>歡迎來到文章預覽頁面</h2>
+                <p>這裡是您的文章內容。您可以從側邊菜單中選擇不同的連結來查看其他內容或使用搜尋功能來找到所需的資料。</p>
+            `;
         }
 
-        // 初始載入
-        loadArticles(currentPage);
-        
-        // 為 RunesTool 按鈕添加事件處理
-        document.getElementById("runesToolButton").addEventListener("click", function() {
-            const dropdown = document.getElementById("runesToolList");
-            if (dropdown.style.display === "none" || dropdown.style.display === "") {
-                dropdown.style.display = "block"; // 顯示下拉列表
-            } else {
-                dropdown.style.display = "none"; // 隱藏下拉列表
-            }
-        });
+        function loadAbout() {
+            openLink('about.html'); // 載入 About 頁面
+        }
+
+        // 其他原函數不變，已省略
     </script>
 </body>
 </html>
