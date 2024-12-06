@@ -7,75 +7,67 @@
     <title>Layman Test</title>
     <style>
         header {
-            height: 50px; /* 縮小 header 高度 */
+            height: 50px; 
         }
 
         .dropdown-list {
-            background-color: #2C3E50; /* 與按鈕相同背景顏色 */
-            color: #F5D07D; /* 與文字顏色相同 */
+            background-color: #2C3E50; 
+            color: #F5D07D; 
             padding: 10px;
-            display: none; /* 預設隱藏 */
+            display: none; 
         }
 
         .dropdown-list a {
-            color: #F5D07D; /* 文字顏色 */
-            display: block; /* 每行一個鏈接 */
-            text-decoration: none; /* 移除底線 */
-            padding: 5px 0; /* 上下填充 */
+            color: #F5D07D; 
+            display: block; 
+            text-decoration: none; 
+            padding: 5px 0; 
         }
 
         .dropdown-list a:hover {
-            text-decoration: underline; /* 懸停時添加底線效果 */
+            text-decoration: underline; 
         }
 
         .article-pane {
-            margin: 20px 0; /* 文章面板上下外邊距 */
-            max-width: 80%; /* 可調整大小的提示 */
-            margin-left: auto; /* 左右居中 */
-            margin-right: auto; /* 左右居中 */
-        }
-
-        .search-results {
-            margin-top: 20px; /* 給搜索結果一些間距 */
+            margin: 20px auto; 
+            max-width: 80%; 
         }
 
         .svg-container {
             display: flex;
-            justify-content: space-between; /* 使SVG均勻分佈 */
-            max-width: 100%; /* 限制於菜單的寬度 */
-            margin: 20px 0; /* 上下外邊距 */
-            flex-wrap: wrap; /* 超出時換行 */
+            justify-content: space-between; 
+            max-width: 100%; 
+            margin: 20px 0; 
         }
 
         .svg-container svg {
-            width: 12%; /* 重新設定為12% */
-            height: auto; /* 自動調整高度 */
-            cursor: pointer; /* 鼠標變成指針以表達可點擊 */
-            margin: 0 5px; /* 增加間隔 */
+            width: 12%; 
+            cursor: pointer; 
+            margin: 0 5px; 
         }
 
         .image-carousel {
-            width: 128px; /* 圖片窗口寬度 */
-            height: 128px; /* 圖片窗口高度 */
-            border-radius: 8px; /* 圓角 */
-            overflow: hidden; /* 隱藏溢出 */
-            margin: 10px auto; /* 中心對齊 */
+            width: 128px; 
+            height: 128px; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            margin: 10px auto; 
         }
 
         .image-carousel img {
-            width: 128px; /* 圖片尺寸 */
+            width: 100%; 
+            height: auto; 
         }
 
-        /* 菜單按鈕樣式 */
         .sidebar button {
-            text-align: left; /* 左對齊 */
-            width: 100%; /* 寬度設為100% */
-            padding: 3px; /* 增加內邊距以增強可點擊性 */
-            background: none; /* 背景透明 */
-            border: none; /* 移除邊框 */
-            color: #F5D07D; /* 文字顏色 */
-            font-size: 32px; /* 字體大小 */
-            cursor: pointer; /* 鼠標顯示為指針 */
+            text-align: left; 
+            width: 100%; 
+            padding: 3px; 
+            background: none; 
+            border: none; 
+            color: #F5D07D; 
+            font-size: 32px; 
+            cursor: pointer; 
         }
     </style>
 </head>
@@ -100,7 +92,6 @@
                 <svg onclick="openLink('link5.html')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><line x1="10" y1="10" x2="90" y2="90" stroke="purple" stroke-width="8"/></svg>
                 <svg onclick="openLink('link6.html')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10 10 h 80 v 80 h -80 Z" fill="orange"/></svg>
             </div>
-            
             <button onclick="loadHome()">Home</button>
             <button id="runesToolButton" onclick="toggleRunesToolList()">RunesTool</button>
             <div id="runesToolList" class="dropdown-list">
@@ -116,15 +107,14 @@
             
             <div class="image-carousel" onclick="nextImage()">
                 <img id="dynamic-image" src="Runes/assets/dynamic-image/image1.gif" alt="Dynamic Image">
-                <p style="text-align: center;">點擊圖片以切換</p> <!-- 提示用戶進行操作 -->
+                <p style="text-align: center;">點擊圖片以切換</p>
             </div>
             <div class="avatar-text">
                 <span><p class="footer-text">&copy; Rushionn's Ai Theme</p></span>
             </div>
         </nav>
         <main>
-            <div id="article-container">
-                <!-- 在此直接顯示文章內容 -->
+            <div id="article-container" class="article-pane">
                 <h2>歡迎來到文章預覽頁面</h2>
                 <p>這裡是您的文章內容。您可以從側邊菜單中選擇不同的連結來查看其他內容或使用搜尋功能來找到所需的資料。</p>
             </div>
@@ -140,67 +130,59 @@
     <script src="js/script.js"></script>
     <script>
         const articles = [
-            // 假設存在一些模擬文章，這部分應根據實際情況填寫
-            {
-                title: "文章1",
-                content: "這是文章1的內容。"
-            },
-            {
-                title: "文章2",
-                content: "這是文章2的內容。"
-            }
+            'Runes/articles/article1.html',
+            'Runes/articles/article2.html',
+            'Runes/articles/article3.html',
+            'Runes/articles/article4.html'
         ];
         
-        const images = ["Runes/assets/dynamic-image/image1.gif", "Runes/assets/dynamic-image/image2.gif", "Runes/assets/dynamic-image/image3.gif"]; // 圖片數組，請確保路徑正確
+        const images = [
+            "Runes/assets/dynamic-image/image1.gif",
+            "Runes/assets/dynamic-image/image2.gif",
+            "Runes/assets/dynamic-image/image3.gif"
+        ];
+        
         let currentImageIndex = 0;
 
         function toggleRunesToolList() {
             const list = document.getElementById('runesToolList');
-            if (list.style.display === 'block') {
-                list.style.display = 'none';
-            } else {
-                list.style.display = 'block';
-            }
+            list.style.display = list.style.display === 'block' ? 'none' : 'block';
         }
 
         function nextImage() {
-            currentImageIndex = (currentImageIndex + 1) % images.length; // 切換到下一張圖片
-            document.getElementById("dynamic-image").src = images[currentImageIndex]; // 更新圖片路徑
-            const audio = new Audio('click-sound.mp3'); // 音效的路徑
-            audio.play(); // 播放音效
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            document.getElementById("dynamic-image").src = images[currentImageIndex];
+            new Audio('click-sound.mp3').play();
         }
 
         function openLink(link) {
-            fetch(link)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.querySelector('main').innerHTML = data; // 更新主內容
-                })
-                .catch(error => console.error('Error loading link:', error));
+            fetch(link).then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            }).then(data => {
+                document.querySelector('main').innerHTML = data;
+            }).catch(error => console.error('Error loading link:', error));
         }
 
         function loadHome() {
-            const articleContent = articles.map(article => `
-                <h2>${article.title}</h2>
-                <p>${article.content}</p>
-            `).join('');
-            
-            document.querySelector('main').innerHTML = `
-                <h2>歡迎來到文章預覽頁面</h2>
-                <div id="article-container">${articleContent}</div>
-            `;
+            // 直接載入第一篇文章的內容
+            fetch(articles[0])
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.text();
+                })
+                .then(data => {
+                    document.querySelector('main').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading article:', error));
         }
 
         function loadAbout() {
-            openLink('about.html'); // 載入 About 頁面
+            openLink('about.html');
         }
 
-        // 其他原函數不變，已省略
+        // 初次載入時顯示首頁內容
+        loadHome();
     </script>
 </body>
 </html>
