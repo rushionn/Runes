@@ -48,9 +48,10 @@
         }
 
         .svg-container svg {
-            width: 16%;
+            width: 12%; /* 重新設定為12% */
             height: auto; /* 自動調整高度 */
             cursor: pointer; /* 鼠標變成指針以表達可點擊 */
+            margin: 0 5px; /* 增加間隔 */
         }
 
         .image-carousel {
@@ -101,7 +102,7 @@
             </div>
             
             <button onclick="loadHome()">Home</button>
-            <button id="runesToolButton">RunesTool</button>
+            <button id="runesToolButton" onclick="toggleRunesToolList()">RunesTool</button>
             <div id="runesToolList" class="dropdown-list">
                 <a href="#" onclick="loadRunesTool('RunesTool/BatTransform/index.html')">BatTransform</a>
                 <a href="#" onclick="loadRunesTool('RunesTool/BytesIOTransform/index.html')">BytesIOTransform</a>
@@ -139,11 +140,28 @@
     <script src="js/script.js"></script>
     <script>
         const articles = [
-            // 取消顯示模擬文章
+            // 假設存在一些模擬文章，這部分應根據實際情況填寫
+            {
+                title: "文章1",
+                content: "這是文章1的內容。"
+            },
+            {
+                title: "文章2",
+                content: "這是文章2的內容。"
+            }
         ];
         
         const images = ["Runes/assets/dynamic-image/image1.gif", "Runes/assets/dynamic-image/image2.gif", "Runes/assets/dynamic-image/image3.gif"]; // 圖片數組，請確保路徑正確
         let currentImageIndex = 0;
+
+        function toggleRunesToolList() {
+            const list = document.getElementById('runesToolList');
+            if (list.style.display === 'block') {
+                list.style.display = 'none';
+            } else {
+                list.style.display = 'block';
+            }
+        }
 
         function nextImage() {
             currentImageIndex = (currentImageIndex + 1) % images.length; // 切換到下一張圖片
@@ -153,7 +171,6 @@
         }
 
         function openLink(link) {
-            // 前面已經有的函數保持不變
             fetch(link)
                 .then(response => {
                     if (!response.ok) {
@@ -168,10 +185,14 @@
         }
 
         function loadHome() {
-            // 前面已經有的函數保持不變
+            const articleContent = articles.map(article => `
+                <h2>${article.title}</h2>
+                <p>${article.content}</p>
+            `).join('');
+            
             document.querySelector('main').innerHTML = `
                 <h2>歡迎來到文章預覽頁面</h2>
-                <p>這裡是您的文章內容。您可以從側邊菜單中選擇不同的連結來查看其他內容或使用搜尋功能來找到所需的資料。</p>
+                <div id="article-container">${articleContent}</div>
             `;
         }
 
