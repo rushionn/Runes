@@ -52,11 +52,19 @@
             border-radius: 8px; 
             overflow: hidden; 
             margin: 10px auto; 
+            position: relative; /* 使之相對定位來處理圖片過渡 */
         }
 
         .image-carousel img {
             width: 100%; 
             height: auto; 
+            position: absolute; /* 確保所有圖片重疊 */
+            opacity: 0; /* 務必從透明狀態開始 */
+            transition: opacity 0.5s ease; /* 設定過渡效果 */
+        }
+
+        .image-carousel img.active {
+            opacity: 1; /* 當前圖片可見 */
         }
 
         .sidebar button {
@@ -106,7 +114,9 @@
             </div>
             
             <div class="image-carousel" onclick="nextImage()">
-                <img id="dynamic-image" src="Runes/assets/dynamic-image/image1.gif" alt="Dynamic Image">
+                <img class="active" id="dynamic-image-1" src="Runes/assets/dynamic-image/image1.gif" alt="Dynamic Image">
+                <img id="dynamic-image-2" src="Runes/assets/dynamic-image/image2.gif" alt="Dynamic Image">
+                <img id="dynamic-image-3" src="Runes/assets/dynamic-image/image3.gif" alt="Dynamic Image">
                 <p style="text-align: center;">點擊圖片以切換</p>
             </div>
             <div class="avatar-text">
@@ -150,9 +160,10 @@
         }
 
         function nextImage() {
+            // 切換圖片
+            document.getElementById(`dynamic-image-${currentImageIndex + 1}`).classList.remove('active');
             currentImageIndex = (currentImageIndex + 1) % images.length;
-            document.getElementById("dynamic-image").src = images[currentImageIndex];
-            new Audio('click-sound.mp3').play();
+            document.getElementById(`dynamic-image-${currentImageIndex + 1}`).classList.add('active');
         }
 
         function openLink(link) {
@@ -160,21 +171,34 @@
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.text();
             }).then(data => {
-                document.querySelector('main').innerHTML = data;
+                document.querySelector('#article-container').innerHTML = data;
             }).catch(error => console.error('Error loading link:', error));
         }
 
         function loadHome() {
-            // 直接載入第一篇文章的內容
+            // 載入第一篇文章
             fetch(articles[0])
                 .then(response => {
                     if (!response.ok) throw new Error('Network response was not ok');
                     return response.text();
                 })
                 .then(data => {
-                    document.querySelector('main').innerHTML = data;
+                    document.querySelector('#article-container').innerHTML = data;
                 })
                 .catch(error => console.error('Error loading article:', error));
+        }
+
+        function loadRunesTool(link) {
+            // 加載 RunesTool
+            fetch(link)
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.text();
+                })
+                .then(data => {
+                    document.querySelector('#article-container').innerHTML = data; // 在主內容區域顯示工具內容
+                })
+                .catch(error => console.error('Error loading RunesTool:', error));
         }
 
         function loadAbout() {
